@@ -8,12 +8,12 @@ SFG_PULLSECRECT=${SFG_PULLSECRECT:-"ibm-entitlement-key"}
 APP_RESOURCES_PVC_ENABLED=${APP_RESOURCES_PVC_ENABLED:-"true"}
 APP_DOCUMENTS_PVC_ENABLED=${APP_DOCUMENTS_PVC_ENABLED:-"true"}
 DATASETUP_ENABLED=${DATASETUP_ENABLED:-"true"}
-DBHOST=$(oc get svc db2-lb -n db2 -o jsonpath='{ .status.loadBalancer.ingress[0].ip}')
-DBPORT=$(oc get svc db2-lb -n db2 -o jsonpath='{ .spec.ports[0].port}')
+DBHOST=$(oc get svc db2-lb -n b2bi -o jsonpath='{ .status.loadBalancer.ingress[0].ip}')
+DBPORT=$(oc get svc db2-lb -n b2bi -o jsonpath='{ .spec.ports[0].port}')
 DBDATA=${DBDATA:-"B2BIDB"}
 DBCREATESCHEMA=${DBCREATESCHEMA:-"true"}
-JMSHOST=$(oc get svc mq-data -n mq -o jsonpath='{ .spec.clusterIP}')
-JMSPORT=$(oc get svc mq-data -n mq -o jsonpath='{ .spec.ports[0].port}')
+JMSHOST=$(oc get svc mq-data -n b2bi -o jsonpath='{ .spec.clusterIP}')
+JMSPORT=$(oc get svc mq-data -n b2bi -o jsonpath='{ .spec.ports[0].port}')
 JMSCONNECTIONNAMELIST="$JMSHOST($JMSPORT)"
 JSMCHANNEL=${JSMCHANNEL:-"DEV.APP.SVRCONN"}
 INGRESS_INTERNAL_HOST_ASI="asi."$(oc get dns cluster -o jsonpath='{ .spec.baseDomain }')
