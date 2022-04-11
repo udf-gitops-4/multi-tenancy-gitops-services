@@ -1,0 +1,31 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "270"
+  name: logs
+  labels:
+    intent: logs
+spec:
+  storageClassName: "ocs-storagecluster-cephfs"
+  capacity:
+    storage: 500Mi
+  accessModes:
+    - ReadWriteMany
+  csi:
+    driver: openshift-storage.cephfs.csi.ceph.com
+    volumeHandle: >-
+      0001-0011-openshift-storage-0000000000000001-63b28003-b931-11ec-9f31-f6c486d2c9d3
+    volumeAttributes:
+      clusterID: openshift-storage
+      fsName: ocs-storagecluster-cephfilesystem
+      storage.kubernetes.io/csiProvisionerIdentity: 1649457478539-8081-openshift-storage.cephfs.csi.ceph.com
+      subvolumeName: csi-vol-63b28003-b931-11ec-9f31-f6c486d2c9d3
+      subvolumePath: >-
+        /volumes/csi/csi-vol-63b28003-b931-11ec-9f31-f6c486d2c9d3/ca3bfded-0688-4734-ad8f-8938b07b1320/logs
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node
+      namespace: openshift-storage
+    controllerExpandSecretRef:
+      name: rook-csi-cephfs-provisioner
+      namespace: openshift-storage

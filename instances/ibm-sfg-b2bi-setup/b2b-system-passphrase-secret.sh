@@ -17,7 +17,7 @@ oc create secret generic b2b-system-passphrase-secret --type=Opaque \
 --dry-run=client -o yaml > delete-b2b-system-passphrase-secret.yaml
 
 # Encrypt the secret using kubeseal and private key from the cluster
-kubeseal -n tools --controller-name=${SEALED_SECRET_CONTOLLER_NAME} --controller-namespace=${SEALED_SECRET_NAMESPACE} -o yaml < delete-b2b-system-passphrase-secret.yaml > b2b-system-passphrase-secret.yaml
+kubeseal -n b2bi --controller-name=${SEALED_SECRET_CONTOLLER_NAME} --controller-namespace=${SEALED_SECRET_NAMESPACE} -o yaml < delete-b2b-system-passphrase-secret.yaml > b2b-system-passphrase-secret.yaml
 
 # NOTE, do not check delete-b2b-system-passphrase-secret.yaml into git!
 rm delete-b2b-system-passphrase-secret.yaml

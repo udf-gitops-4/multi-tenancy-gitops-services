@@ -18,7 +18,7 @@ oc create secret generic b2b-db-secret --type=Opaque \
 --dry-run=client -o yaml > delete-b2b-db-secret-secret.yaml
 
 # Encrypt the secret using kubeseal and private key from the cluster
-kubeseal -n tools --controller-name=${SEALED_SECRET_CONTOLLER_NAME} --controller-namespace=${SEALED_SECRET_NAMESPACE} -o yaml < delete-b2b-db-secret-secret.yaml > b2b-db-secret-secret.yaml
+kubeseal -n b2bi --controller-name=${SEALED_SECRET_CONTOLLER_NAME} --controller-namespace=${SEALED_SECRET_NAMESPACE} -o yaml < delete-b2b-db-secret-secret.yaml > b2b-db-secret-secret.yaml
 
 # NOTE, do not check delete-b2b-db-secret-secret.yaml into git!
 rm delete-b2b-db-secret-secret.yaml
